@@ -36,12 +36,10 @@ func InterceptConfigsPreRunHandler(cmd *cobra.Command) error {
 		return err
 	}
 
-	if len(config.LogLevel) == 0 {
-		if ll := rootViper.GetString("log-level"); len(ll) > 0 {
-			config.LogLevel = ll
-		} else {
-			config.LogLevel = "main:info,state:info,statesync:info,*:error"
-		}
+	if ll := rootViper.GetString("log-level"); len(ll) > 0 {
+		config.LogLevel = ll
+	} else if len(config.LogLevel) == 0 {
+		config.LogLevel = "main:info,state:info,statesync:info,*:error"
 	}
 
 	logger := logging.NewWrappedSuplog("info", config.LogLevel, false)
