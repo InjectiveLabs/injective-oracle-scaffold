@@ -1,0 +1,45 @@
+syntax = "proto3";
+package injective.oracle.v1beta1;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/InjectiveLabs/injective-oracle-scaffold/injective-chain/modules/oracle/types";
+
+message Params {
+  option (gogoproto.equal) = true;
+
+  repeated string relayers = 1;
+}
+
+message Ref {
+  uint64 rate = 1;
+  // unix timestamp seconds
+  uint64 resolve_time = 2;
+  uint64 request_ID = 3;
+}
+
+message ReferenceData {
+  string rate = 1 [
+    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int",
+    (gogoproto.nullable) = false
+  ];
+  uint64 last_update_base = 2;
+  uint64 last_update_quote = 3;
+}
+
+// Event type upon set ref
+message SetRef {
+  string relayer = 1;
+  string symbol = 2;
+  string rate = 3;
+  string resolve_time = 4;
+  string request_id = 5;
+}
+
+// Event type for getting reference data
+message GetReferenceData {
+  string base_quote_symbol = 1;
+  string base_quote_rate = 2;
+  string last_update_base = 3;
+  string last_update_quote = 4;
+}

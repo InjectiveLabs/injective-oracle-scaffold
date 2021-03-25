@@ -1,0 +1,14 @@
+syntax = "proto3";
+package injective.types.v1beta1;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/InjectiveLabs/injective-oracle-scaffold/injective-chain/types";
+
+message ExtensionOptionsWeb3Tx {
+  option (gogoproto.goproto_getters) = false;
+
+  // typedDataChainID used only in EIP712 Domain and should match
+  // Ethereum network ID in a Web3 provider (e.g. Metamask).
+  uint64 typedDataChainID = 1;
+}

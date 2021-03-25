@@ -1,0 +1,36 @@
+syntax = "proto3";
+package injective.oracle.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "cosmos/base/v1beta1/coin.proto";
+import "injective/oracle/v1beta1/oracle.proto";
+option go_package = "github.com/InjectiveLabs/injective-oracle-scaffold/injective-chain/modules/oracle/types";
+
+// Msg defines the oracle Msg service.
+service Msg {
+
+  // SetPrice defines a method for setting a price on an oracle
+  rpc SetPrice(MsgSetPrice) returns (MsgSetPriceResponse);
+
+  // Relay defines a method for relaying rates from Band
+  rpc Relay(MsgRelay) returns (MsgRelayResponse);
+}
+
+// MsgSetPrice defines a SDK message for for creating an oracle
+message MsgSetPrice {
+  option (gogoproto.equal) = false;
+  option (gogoproto.goproto_getters) = false;
+  string sender = 1;
+}
+
+message MsgSetPriceResponse{}
+
+message MsgRelay {
+  string relayer = 1;
+  repeated string symbols = 2;
+  repeated uint64 rates = 3;
+  repeated uint64 resolve_times = 4;
+  repeated uint64 requestIDs = 5;
+}
+
+message MsgRelayResponse{}

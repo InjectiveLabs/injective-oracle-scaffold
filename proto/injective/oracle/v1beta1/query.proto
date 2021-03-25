@@ -1,0 +1,28 @@
+syntax = "proto3";
+package injective.oracle.v1beta1;
+
+import "google/api/annotations.proto";
+import "injective/oracle/v1beta1/oracle.proto";
+import "gogoproto/gogo.proto";
+import "cosmos/base/v1beta1/coin.proto";
+option go_package = "github.com/InjectiveLabs/injective-oracle-scaffold/injective-chain/modules/oracle/types";
+
+// Query defines the gRPC querier service.
+service Query {
+
+  // Retrieves oracle params
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/injective/oracle/v1beta1/params";
+  }
+}
+
+// QueryOracleParamsRequest is the request type for the Query/OracleParams RPC method.
+message QueryParamsRequest {}
+
+// QueryOracleParamsResponse is the response type for the Query/OracleParams RPC method.
+message QueryParamsResponse {
+  Params params = 1 [
+    (gogoproto.nullable) = false
+  ];
+}
+

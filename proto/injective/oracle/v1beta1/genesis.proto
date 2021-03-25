@@ -1,0 +1,14 @@
+syntax = "proto3";
+package injective.oracle.v1beta1;
+
+import "injective/oracle/v1beta1/oracle.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/InjectiveLabs/injective-oracle-scaffold/injective-chain/modules/oracle/types";
+
+// GenesisState defines the oracle module's genesis state.
+message GenesisState {
+  // params defines all the parameters of related to oracle.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
