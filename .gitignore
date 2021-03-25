@@ -34,3 +34,5 @@ tests-solidity/suites/staking/.env
 .env
 
 /injective-chain/modules/old_exchange/
+
+data/
